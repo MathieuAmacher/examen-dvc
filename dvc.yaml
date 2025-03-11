@@ -1,0 +1,50 @@
+stages:
+
+  split:
+    cmd: python3 /home/ubuntu/examen-dvc/src/data/split_data.py
+    deps:
+    - /home/ubuntu/examen-dvc/data/raw_data/raw.csv
+    - /home/ubuntu/examen-dvc/src/data/split_data.py
+    outs:
+    - /home/ubuntu/examen-dvc/data/processed_data/X_train.csv
+    - /home/ubuntu/examen-dvc/data/processed_data/X_test.csv
+    - /home/ubuntu/examen-dvc/data/processed_data/y_train.csv
+    - /home/ubuntu/examen-dvc/data/processed_data/y_test.csv
+
+  normaliza:
+    cmd: python3 /home/ubuntu/examen-dvc/src/data/normalization.py
+    deps:
+    - /home/ubuntu/examen-dvc/data/processed_data/X_train.csv
+    - /home/ubuntu/examen-dvc/data/processed_data/X_test.csv
+    - /home/ubuntu/examen-dvc/src/data/normalization.py
+    outs:
+    - /home/ubuntu/examen-dvc/data/processed_data/X_train_scaled.csv
+    - /home/ubuntu/examen-dvc/data/processed_data/X_test_scaled.csv
+
+  find_best_params:
+    cmd: python3 /home/ubuntu/examen-dvc/src/data/best_params.py
+    deps:
+    - '/home/ubuntu/examen-dvc/data/processed_data/X_train_scaled.csv'
+    - '/home/ubuntu/examen-dvc/data/processed_data/y_train.csv'
+    - /home/ubuntu/examen-dvc/src/data/best_params.py
+    outs:
+    - '/home/ubuntu/examen-dvc/src/models/best_params.pickle'
+  
+  train_model:
+    cmd: python3 /home/ubuntu/examen-dvc/src/data/train_model.py
+    deps:
+    - '/home/ubuntu/examen-dvc/data/processed_data/X_train_scaled.csv'
+    - '/home/ubuntu/examen-dvc/data/processed_data/y_train.csv'
+    - '/home/ubuntu/examen-dvc/src/models/best_params.pickle'
+    outs:
+    - '/home/ubuntu/examen-dvc/models/train_model.pickle'
+
+  evaluate:
+    cmd: python3 '/home/ubuntu/examen-dvc/src/data/evaluate_model.py'
+    deps:
+    - '/home/ubuntu/examen-dvc/models/train_model.pickle'
+    - '/home/ubuntu/examen-dvc/data/processed_data/X_test_scaled.csv'
+    - '/home/ubuntu/examen-dvc/data/processed_data/y_test.csv'
+    outs:
+    - '/home/ubuntu/examen-dvc/data/prediction.csv'
+    - '/home/ubuntu/examen-dvc/metrics/score.json'
