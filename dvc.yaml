@@ -48,3 +48,4 @@ stages:
     outs:
     - '/home/ubuntu/examen-dvc/data/prediction.csv'
     - '/home/ubuntu/examen-dvc/metrics/score.json'
+    
