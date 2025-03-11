@@ -5,7 +5,7 @@ stages:
     deps:
     - path: data/raw_data/raw.csv
       hash: md5
-      md5: b1fbced3eb27385a9a1abbf74952b5fc
+      md5: d56805d4b036e538b48c1b638ba4fca2
       size: 333757
     - path: src/data/split_data.py
       hash: md5
@@ -18,7 +18,7 @@ stages:
       size: 52624
     - path: data/processed_data/X_train.csv
       hash: md5
-      md5: 32359df0653722c4e3ded443c40d85cf
+      md5: 7f10a48d29256ad8a10203a4b868cf34
       size: 209468
     - path: data/processed_data/y_test.csv
       hash: md5
@@ -37,7 +37,7 @@ stages:
       size: 52624
     - path: data/processed_data/X_train.csv
       hash: md5
-      md5: 32359df0653722c4e3ded443c40d85cf
+      md5: 7f10a48d29256ad8a10203a4b868cf34
       size: 209468
     - path: src/data/normalization.py
       hash: md5
@@ -46,19 +46,19 @@ stages:
     outs:
     - path: data/processed_data/X_test_scaled.csv
       hash: md5
-      md5: 0d099a7cff7bd21a60c882b7a727d774
-      size: 58380
+      md5: 18d2c773aa17528ec218707b1c13e551
+      size: 58381
     - path: data/processed_data/X_train_scaled.csv
       hash: md5
-      md5: 2dadfb21089244771a20d42fb699678e
-      size: 233656
+      md5: f741d8dfc94e8b65df2e2ee9be6c6861
+      size: 233629
   find_best_params:
     cmd: python3 /home/ubuntu/examen-dvc/src/data/best_params.py
     deps:
     - path: data/processed_data/X_train_scaled.csv
       hash: md5
-      md5: 2dadfb21089244771a20d42fb699678e
-      size: 233656
+      md5: f741d8dfc94e8b65df2e2ee9be6c6861
+      size: 233629
     - path: data/processed_data/y_train.csv
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
@@ -77,32 +77,32 @@ stages:
     deps:
     - path: data/processed_data/X_test_scaled.csv
       hash: md5
-      md5: 0d099a7cff7bd21a60c882b7a727d774
-      size: 58380
+      md5: 18d2c773aa17528ec218707b1c13e551
+      size: 58381
     - path: data/processed_data/y_test.csv
       hash: md5
       md5: a051d29629c8bbb4cfb7e85c7f0315da
       size: 6456
     - path: models/train_model.pickle
       hash: md5
-      md5: caf5a7127aec09b7ee7ffbb257e70d51
+      md5: 2b29f2a99c91a491594342587e693957
       size: 840
     outs:
     - path: data/prediction.csv
       hash: md5
-      md5: f96048824d56ceaccabc8578b4fb889e
-      size: 6750
+      md5: 1e1f54ba5dd99adf40475748cfe8935d
+      size: 6767
     - path: metrics/score.json
       hash: md5
-      md5: 86402004c1909c800627847b38c0578d
-      size: 80
+      md5: 31b1c3b30c33dc6dec3bb9950903c24f
+      size: 81
   train_model:
     cmd: python3 /home/ubuntu/examen-dvc/src/data/train_model.py
     deps:
     - path: data/processed_data/X_train_scaled.csv
       hash: md5
-      md5: 2dadfb21089244771a20d42fb699678e
-      size: 233656
+      md5: f741d8dfc94e8b65df2e2ee9be6c6861
+      size: 233629
     - path: data/processed_data/y_train.csv
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
@@ -114,5 +114,5 @@ stages:
     outs:
     - path: models/train_model.pickle
       hash: md5
-      md5: caf5a7127aec09b7ee7ffbb257e70d51
+      md5: 2b29f2a99c91a491594342587e693957
       size: 840
