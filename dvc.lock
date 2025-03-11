@@ -96,3 +96,23 @@ stages:
       hash: md5
       md5: 27cbd7aff609338049d2bfad1eadfe09
       size: 81
+  train_model:
+    cmd: python3 /home/ubuntu/examen-dvc/src/data/train_model.py
+    deps:
+    - path: data/processed_data/X_train_scaled.csv
+      hash: md5
+      md5: 99282e2bec70d43f736977c025a05806
+      size: 233653
+    - path: data/processed_data/y_train.csv
+      hash: md5
+      md5: a9cd9d91da89f732843d72548f64ded3
+      size: 25951
+    - path: src/models/best_params.pickle
+      hash: md5
+      md5: 3a0507ce8c7f4228b8b9436410f34510
+      size: 68
+    outs:
+    - path: models/train_model.pickle
+      hash: md5
+      md5: 5a99c8483ce8cca0cd806a6bcf5386d5
+      size: 840
