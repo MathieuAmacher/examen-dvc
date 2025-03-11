@@ -1,3 +1,5 @@
 /venv
 
-.dvc/config
+*.dvc
+*.dvc/config
+.dvc/
