@@ -2,3 +2,4 @@
 
 .dvc/config
 /models/train_model.pickle
+/metrics/score.json
